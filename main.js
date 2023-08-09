@@ -1,4 +1,5 @@
-// main.js
+const fs = require('fs');
+const path = require('path');
 
 // User Inputs
 const desiredRate = 6; // Desired production rate per second
@@ -12,17 +13,12 @@ const machines = require('./machines');
 function calculateResources(recipe, desiredRate) {
   const machine = machines[recipe.machine];
 
-  console.log("Recipe:", recipe);
-  console.log("Machine:", machine);
-
   if (!machine) {
-    console.log(`Machine '${recipe.machine}' not found.`);
-    return;
+    return `Machine '${recipe.machine}' not found.`;
   }
 
   if (!machine.time || !recipe.outputs["Iron Plate"]) {
-    console.log(`Invalid machine or recipe data.`);
-    return;
+    return "Invalid machine or recipe data.";
   }
 
   const timePerOutput = machine.time / recipe.outputs["Iron Plate"];
@@ -42,8 +38,16 @@ function calculateResources(recipe, desiredRate) {
 if (recipes[recipeName]) {
   const resourcesRequired = calculateResources(recipes[recipeName], desiredRate);
   if (resourcesRequired) {
-    console.log(`Resources required for ${desiredRate} ${recipeName} per second:`);
-    console.log(resourcesRequired);
+    const logPath = path.join(__dirname, 'logs');
+    fs.mkdirSync(logPath, { recursive: true });
+
+    const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/\..+/, '');
+    const logFilePath = path.join(logPath, `${timestamp}_output.log`);
+    
+    const logContent = `Resources required for ${desiredRate} ${recipeName} per second:\n${JSON.stringify(resourcesRequired, null, 2)}\n`;
+    
+    fs.writeFileSync(logFilePath, logContent);
+    console.log(`Log file saved: ${logFilePath}`);
   }
 } else {
   console.log(`Recipe '${recipeName}' not found.`);
