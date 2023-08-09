@@ -2,18 +2,13 @@ const fs = require('fs');
 const path = require('path');
 
 // Import user inputs
-const inputs = require('./input');
-
-// Extract desiredRate and recipeName from inputs
-const { desiredRate, recipeName } = inputs;
+const inputs = require('./inputs');
 
 // Import recipes
 const recipes = require('./recipes');
 
-// ... (rest of your code remains the same)
-
-// Calculate resource requirements for each recipe
-function calculateResources(recipeName, desiredRate) {
+// Calculate resource requirements for a single recipe
+function calculateResourcesForRecipe(recipeName, desiredRate) {
   const recipe = recipes[recipeName];
 
   if (!recipe) {
@@ -38,15 +33,30 @@ function calculateResources(recipeName, desiredRate) {
   return requiredResources;
 }
 
-// Usage and log
-if (recipes[recipeName]) {
-  const resourcesRequired = calculateResources(recipeName, desiredRate);
-  if (resourcesRequired) {
-    const logFilePath = path.join(__dirname, 'log');
-    const logContent = `Resources required for ${desiredRate} ${recipeName} per 10 seconds:\n${JSON.stringify(resourcesRequired, null, 2)}\n`;
-    fs.writeFileSync(logFilePath, logContent);
-    console.log(`Log file saved: ${logFilePath}`);
+// Calculate total resource requirements for multiple recipes
+function calculateTotalResources(recipeInputs) {
+  const totalResources = {};
+
+  for (const { recipeName, desiredRate } of recipeInputs) {
+    const resourcesForRecipe = calculateResourcesForRecipe(recipeName, desiredRate);
+    if (resourcesForRecipe) {
+      for (const resource in resourcesForRecipe) {
+        totalResources[resource] = (totalResources[resource] || 0) + resourcesForRecipe[resource];
+      }
+    }
   }
+
+  return totalResources;
+}
+
+// Usage and log
+const totalResourcesRequired = calculateTotalResources(inputs);
+
+if (Object.keys(totalResourcesRequired).length > 0) {
+  const logFilePath = path.join(__dirname, 'log');
+  const logContent = `Total Resources required for desired rates:\n${JSON.stringify(totalResourcesRequired, null, 2)}\n`;
+  fs.writeFileSync(logFilePath, logContent);
+  console.log(`Log file saved: ${logFilePath}`);
 } else {
-  console.log(`Recipe '${recipeName}' not found.`);
+  console.log("No valid recipes found.");
 }
