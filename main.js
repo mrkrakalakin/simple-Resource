@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 // User Inputs
-const givenRate = 32; // Desired production rate per second
+const givenRate = 64; // Desired production rate per second
 const recipeName = "Iron Plate"; // Specify recipe for calculation
 const desiredRate = givenRate / 10;
 
@@ -35,7 +35,7 @@ function calculateResources(recipeName, desiredRate) {
   return requiredResources;
 }
 
-// Usage
+// Usage and log
 if (recipes[recipeName]) {
   const resourcesRequired = calculateResources(recipeName, desiredRate);
   if (resourcesRequired) {
