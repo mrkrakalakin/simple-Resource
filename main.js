@@ -2,14 +2,14 @@ const fs = require('fs');
 const path = require('path');
 
 // User Inputs
-const givenRate = 56; // Desired production rate per second
-const recipeName = "Iron Plate"; // Specify "Iron Plate" for calculation
+const givenRate = 32; // Desired production rate per second
+const recipeName = "Iron Plate"; // Specify recipe for calculation
 const desiredRate = givenRate / 10;
 
 // Import recipes
 const recipes = require('./recipes');
 
-// Calculate resource requirements for a specific recipe
+// Calculate resource requirements for each recipe
 function calculateResources(recipeName, desiredRate) {
   const recipe = recipes[recipeName];
 
@@ -18,7 +18,7 @@ function calculateResources(recipeName, desiredRate) {
   }
 
   const machineTime = recipe.machineTime; // Get the machine time from the recipe
-  const timePerOutput = machineTime / recipe.outputs[recipeName];
+  const timePerOutput = recipe.outputs[recipeName] / machineTime;
 
   const requiredResources = {};
 
@@ -35,7 +35,7 @@ function calculateResources(recipeName, desiredRate) {
   return requiredResources;
 }
 
-// Example usage
+// Usage
 if (recipes[recipeName]) {
   const resourcesRequired = calculateResources(recipeName, desiredRate);
   if (resourcesRequired) {
