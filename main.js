@@ -4,22 +4,21 @@ const path = require('path');
 // User Inputs
 const givenRate = 56; // Desired production rate per second
 const recipeName = "Iron Plate"; // Specify "Iron Plate" for calculation
-const desiredRate = givenRate/10
+const desiredRate = givenRate / 10;
 
-// Import recipes and machines
+// Import recipes
 const recipes = require('./recipes');
-const machines = require('./machines');
 
 // Calculate resource requirements for a specific recipe
 function calculateResources(recipeName, desiredRate) {
   const recipe = recipes[recipeName];
-  const machine = machines[recipe.machine];
 
-  if (!recipe || !machine) {
-    return `Recipe or machine not found for '${recipeName}'.`;
+  if (!recipe) {
+    return `Recipe not found for '${recipeName}'.`;
   }
 
-  const timePerOutput = machine.time / recipe.outputs[recipeName];
+  const machineTime = recipe.machineTime; // Get the machine time from the recipe
+  const timePerOutput = machineTime / recipe.outputs[recipeName];
 
   const requiredResources = {};
 
@@ -29,8 +28,9 @@ function calculateResources(recipeName, desiredRate) {
     requiredResources[inputResource] = inputRate * timePerOutput;
   }
 
-  // Add machine requirements
-  requiredResources[recipe.machine] = Math.ceil(desiredRate * timePerOutput);
+  // Calculate and include number of machines needed (rounded up)
+  const machinesNeeded = Math.ceil(desiredRate * timePerOutput);
+  requiredResources[recipe.machine] = machinesNeeded;
 
   return requiredResources;
 }
