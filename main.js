@@ -2,8 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 // User Inputs
-const desiredRate = 6; // Desired production rate per second
+const givenRate = 20; // Desired production rate per second
 const recipeName = "Iron Plate"; // Specify "Iron Plate" for calculation
+const desiredRate = givenRate/10
 
 // Import recipes and machines
 const recipes = require('./recipes');
@@ -31,6 +32,9 @@ function calculateResources(recipe, desiredRate) {
     requiredResources[inputResource] = inputRate * timePerOutput;
   }
 
+  // Add machine requirements
+  requiredResources[recipe.machine] = Math.ceil(desiredRate * timePerOutput);
+
   return requiredResources;
 }
 
@@ -40,7 +44,7 @@ if (recipes[recipeName]) {
   if (resourcesRequired) {
     const logFilePath = path.join(__dirname, 'log');
     
-    const logContent = `Resources required for ${desiredRate} ${recipeName} per second:\n${JSON.stringify(resourcesRequired, null, 2)}\n`;
+    const logContent = `Resources required for ${givenRate} ${recipeName} per 10 seconds:\n${JSON.stringify(resourcesRequired, null, 2)}\n`;
     
     fs.writeFileSync(logFilePath, logContent);
     console.log(`Log file saved: ${logFilePath}`);
