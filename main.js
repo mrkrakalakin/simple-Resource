@@ -38,11 +38,7 @@ function calculateResources(recipe, desiredRate) {
 if (recipes[recipeName]) {
   const resourcesRequired = calculateResources(recipes[recipeName], desiredRate);
   if (resourcesRequired) {
-    const logPath = path.join(__dirname, 'logs');
-    fs.mkdirSync(logPath, { recursive: true });
-
-    const timestamp = new Date().toISOString().replace(/:/g, '-').replace(/\..+/, '');
-    const logFilePath = path.join(logPath, `${timestamp}_output.log`);
+    const logFilePath = path.join(__dirname, 'log');
     
     const logContent = `Resources required for ${desiredRate} ${recipeName} per second:\n${JSON.stringify(resourcesRequired, null, 2)}\n`;
     
