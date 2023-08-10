@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
-import recipes from './recipes';
-import calculateResourcesForRecipe from './calculateRecipes'; // Import the calculateResourcesForRecipe function
+import calculateResourcesForRecipe from '../data/calculateRecipes';
+import TreeVisualization from './TreeVisualization';
+import recipes from '../data/recipes';
 
 function RecipeSelector({ setCalculatedData }) {
   const [desiredAmounts, setDesiredAmounts] = useState({});
+  const [showTree, setShowTree] = useState(false);
 
   const handleAmountChange = (recipeName, amount) => {
     setDesiredAmounts(prevAmounts => ({ ...prevAmounts, [recipeName]: amount }));
   };
 
   const handleCalculate = () => {
-    // Call the function that calculates the resources and sets the calculated data
-    const calculatedData = calculateResourcesForRecipe(desiredAmounts);
-    setCalculatedData(calculatedData);
+    const inputMachines = {};
+    const updatedCalculatedData = {};
+
+    for (const recipeName in desiredAmounts) {
+      const amount = parseFloat(desiredAmounts[recipeName]);
+      if (!isNaN(amount)) {
+        updatedCalculatedData[recipeName] = amount;
+      }
+    }
+
+    const resourcesData = calculateResourcesForRecipe(updatedCalculatedData, 1, 0, inputMachines);
+    setCalculatedData(resourcesData);
+    setShowTree(true);
   };
 
   return (
@@ -29,6 +41,7 @@ function RecipeSelector({ setCalculatedData }) {
         </div>
       ))}
       <button onClick={handleCalculate}>Calculate</button>
+      {showTree && <TreeVisualization data={setCalculatedData} />}
     </div>
   );
 }
