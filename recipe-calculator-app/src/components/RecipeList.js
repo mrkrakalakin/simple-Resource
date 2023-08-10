@@ -21,10 +21,11 @@ function RecipeList() {
           <li key={recipeName}>
             {recipeName}:
             <input
-              className="small-input"
-              type="number"
+              type="text"
               value={desiredAmounts[recipeName] || ""}
               onChange={(e) => handleAmountChange(recipeName, e.target.value)}
+              className="small-input"
+              inputMode="numeric"
             />
           </li>
         ))}
