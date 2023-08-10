@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import calculateResourcesForRecipe from '../data/calculateRecipes';
-import TreeVisualization from './TreeVisualization';
-import recipes from '../data/recipes';
+import calculateResourcesForRecipe from '../data/calculateResources';
+import TreeVisualization from './ResourceTree';
+import recipes from '../data/recipesData';
 
 function RecipeSelector({ setCalculatedData }) {
   const [desiredAmounts, setDesiredAmounts] = useState({});

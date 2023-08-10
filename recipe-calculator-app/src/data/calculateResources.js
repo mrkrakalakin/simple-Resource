@@ -1,5 +1,5 @@
 // Import the recipes.js file
-const recipes = require("./recipes");
+const recipes = require("./recipesData");
 
 // Calculate resource requirements for a single recipe
 function calculateResources(recipeName, desiredRate, indent = 0, machines) {

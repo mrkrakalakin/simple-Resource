@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import calculateResourcesForRecipe from '../data/calculateRecipes';
+import calculateResourcesForRecipe from '../data/calculateResources';
 
 function RecipeCalculator() {
   const [recipeName, setRecipeName] = useState('');

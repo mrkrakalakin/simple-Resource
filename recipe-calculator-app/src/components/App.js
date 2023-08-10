@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import RecipeSelector from './RecipeSelector';
-import TreeVisualization from './TreeVisualization';
+import TreeVisualization from './ResourceTree';
 import '../styles/styles.css';
 
 function App() {
