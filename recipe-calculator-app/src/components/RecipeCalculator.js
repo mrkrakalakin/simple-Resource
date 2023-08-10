@@ -13,16 +13,8 @@ function RecipeCalculator() {
   };
 
   const handleCalculate = () => {
-    const updatedCalculatedData = {};
+    const updatedCalculatedData = { ...desiredAmounts };
     
-    // Filter out entries with NaN values (not valid numbers)
-    for (const recipeName in desiredAmounts) {
-      const amount = parseFloat(desiredAmounts[recipeName]);
-      if (!isNaN(amount)) {
-        updatedCalculatedData[recipeName] = amount;
-      }
-    }
-
     const resourcesData = calculateResources(updatedCalculatedData, 1, 0, {});
     setCalculatedResources(resourcesData);
   };
