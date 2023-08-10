@@ -9,10 +9,10 @@ function RecipeCalculator() {
   const [desiredAmounts, setDesiredAmounts] = useState({});
 
   const handleAmountChange = (recipeName, amount) => {
-    // Format the recipeName to match keys in recipesData
     const formattedRecipeName = recipeName.toLowerCase();
     setDesiredAmounts(prevAmounts => ({ ...prevAmounts, [formattedRecipeName]: parseFloat(amount) }));
   };
+  
 
   const handleCalculate = () => {
     const updatedCalculatedData = { ...desiredAmounts };
