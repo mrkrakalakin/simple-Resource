@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import recipes from './recipes';
-// Make sure you have this import statement in RecipeSelector.js
-import TreeVisualization from './TreeVisualization';
+import calculateResourcesForRecipe from './calculateRecipes'; // Import the calculateResourcesForRecipe function
 
-
-function RecipeSelector() {
+function RecipeSelector({ setCalculatedData }) {
   const [desiredAmounts, setDesiredAmounts] = useState({});
-  const [showTree, setShowTree] = useState(false); // State to control TreeVisualization visibility
 
   const handleAmountChange = (recipeName, amount) => {
     setDesiredAmounts(prevAmounts => ({ ...prevAmounts, [recipeName]: amount }));
   };
 
   const handleCalculate = () => {
-    setShowTree(true);
+    // Call the function that calculates the resources and sets the calculated data
+    const calculatedData = calculateResourcesForRecipe(desiredAmounts);
+    setCalculatedData(calculatedData);
   };
 
   return (
@@ -30,7 +29,6 @@ function RecipeSelector() {
         </div>
       ))}
       <button onClick={handleCalculate}>Calculate</button>
-      {showTree && <TreeVisualization data={{ /* Your data here */ }} />}
     </div>
   );
 }
