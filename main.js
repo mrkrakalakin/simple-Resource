@@ -1,21 +1,23 @@
 const fs = require('fs');
 const path = require('path');
 
-// Import user inputs
-const inputs = require('./inputs');
-
-// Import recipes
+// Import recipes.js
 const recipes = require('./recipes');
+
+// Import inputs.js
+const inputs = require('./inputs');
 
 // Calculate resource requirements for a single recipe
 function calculateResourcesForRecipe(recipeName, desiredRate, indent = 0) {
+  // Converts recipes to objects
   const recipe = recipes[recipeName];
-
+  // If the input recipe is not found, print this error
   if (!recipe) {
     return `Recipe not found for '${recipeName}'.`;
   }
-
+  // Get's machineTime from recipe
   const machineTime = recipe.machineTime;
+  // Convert machineTime to avg. output per second based on amount
   const outputPerSec = recipe.outputs[recipeName] / machineTime;
 
   const requiredResources = {};
