@@ -37,20 +37,21 @@ function calculateResourcesForRecipe(
   }
 
   for (const inputResource in recipe.inputs) {
-    const inputRate = recipe.inputs[inputResource] * desiredRate;
     if (recipe.inputs.hasOwnProperty(inputResource)) {
-      const resourcesForInput = calculateResourcesForRecipe(
-        inputResource,
-        inputRate,
-        indent + 1,
-        machines
-      );
-      requiredResources[inputResource] = resourcesForInput;
-    } else {
-      requiredResources[inputResource] = inputRate;
+      const inputRate = recipe.inputs[inputResource] * desiredRate;
+      if (inputResource in recipes) {
+        const resourcesForInput = calculateResourcesForRecipe(
+          inputResource,
+          inputRate,
+          indent + 1,
+          machines
+        );
+        requiredResources[inputResource] = resourcesForInput;
+      } else {
+        requiredResources[inputResource] = inputRate;
+      }
     }
   }
-
   return requiredResources;
 }
 
@@ -99,9 +100,16 @@ for (const { recipeName, desiredRate } of inputs) {
       machines
     );
     if (resourcesForRecipe) {
-      logContent.push(`Resource requirements for '${recipeName}' (${desiredRate}):`);
+      logContent.push(
+        `Resource requirements for '${recipeName}' (${desiredRate}):`
+      );
       logContent.push(`Output: ${desiredRate}`);
-      logContent.push(formatIndentedResources({ Machines: machines, Resources: resourcesForRecipe }, 1));
+      logContent.push(
+        formatIndentedResources(
+          { Machines: machines, Resources: resourcesForRecipe },
+          1
+        )
+      );
       logContent.push(""); // Add an empty line after each recipe log
     }
   }

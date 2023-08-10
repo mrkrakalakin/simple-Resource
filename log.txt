@@ -18,15 +18,15 @@ Output: 10
       Titanium Plate:
         recipeName: Titanium Plate
         desiredRate: 10
-        Titanium Ore: Recipe not found for 'Titanium Ore'.
+        Titanium Ore: 20
       Iron Gear:
         recipeName: Iron Gear
         desiredRate: 10
         Iron Plate:
           recipeName: Iron Plate
           desiredRate: 10
-          Iron Ore: Recipe not found for 'Iron Ore'.
-          Coal: Recipe not found for 'Coal'.
+          Iron Ore: 10
+          Coal: 1.6666666666666665
     Motor:
       recipeName: Motor
       desiredRate: 10
@@ -36,26 +36,26 @@ Output: 10
         Iron Plate:
           recipeName: Iron Plate
           desiredRate: 10
-          Iron Ore: Recipe not found for 'Iron Ore'.
-          Coal: Recipe not found for 'Coal'.
-      Rotor: Recipe not found for 'Rotor'.
-      Green Wire: Recipe not found for 'Green Wire'.
+          Iron Ore: 10
+          Coal: 1.6666666666666665
+      Rotor: 10
+      Green Wire: 10
       Iron Frame:
         recipeName: Iron Frame
         desiredRate: 10
         Iron Plate:
           recipeName: Iron Plate
           desiredRate: 10
-          Iron Ore: Recipe not found for 'Iron Ore'.
-          Coal: Recipe not found for 'Coal'.
+          Iron Ore: 10
+          Coal: 1.6666666666666665
         Iron Pipe:
           recipeName: Iron Pipe
           desiredRate: 10
           Iron Plate:
             recipeName: Iron Plate
             desiredRate: 10
-            Iron Ore: Recipe not found for 'Iron Ore'.
-            Coal: Recipe not found for 'Coal'.
-    Steel Plate: Recipe not found for 'Steel Plate'.
-    Super Connector: Recipe not found for 'Super Connector'.
+            Iron Ore: 10
+            Coal: 1.6666666666666665
+    Steel Plate: 20
+    Super Connector: 10
 
