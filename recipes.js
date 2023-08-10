@@ -24,6 +24,13 @@ const recipes = {
     inputs: { "Gravel": 3, "Coal": 1 },
     outputs: { "Silicone Plate": 1 }
   },
+  "Silver Bar": {
+    machine: "Silver Furnace",
+    machineTime: 1.53,
+    inputs: { "Silver Ore": 3 },
+
+
+  }
   "Iron Gear": {
     machine: "Iron Gear Assembler",
     machineTime: 1.25,
