@@ -18,6 +18,18 @@ const recipes = {
     inputs: { "Bauxite Ore": 1, "Coal": 1 / 6 },
     outputs: { "Aluminium Plate": 1 },
   },
+  "Silicone Plate": {
+    machine: "Silicone Chemical Plant",
+    machineTime: 1.53,
+    inputs: { "Gravel": 3, "Coal": 1 },
+    outputs: { "Silicone Plate": 1 }
+  },
+  "Iron Gear": {
+    machine: "Iron Gear Assembler",
+    machineTime: 1.25,
+    inputs: { "Iron Plate": 1 },
+    outputs: { "Iron Gear": 1 }
+  }
 };
 
 module.exports = recipes;

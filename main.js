@@ -8,7 +8,11 @@ const inputs = require('./inputs');
 const recipes = require('./recipes');
 
 // Calculate resource requirements for a single recipe
-function calculateResourcesForRecipe(recipeName, desiredRate) {
+function calculateResourcesForRecipe(recipeName, desiredRate, calculatedRecipes = {}) {
+  if (calculatedRecipes[recipeName]) {
+    return calculatedRecipes[recipeName];
+  }
+
   const recipe = recipes[recipeName];
 
   if (!recipe) {
@@ -20,18 +24,31 @@ function calculateResourcesForRecipe(recipeName, desiredRate) {
 
   const requiredResources = {};
 
-  // Calculate input resources
+  // Recursively calculate input resources and inputs of inputs
   for (const inputResource in recipe.inputs) {
     const inputRate = recipe.inputs[inputResource] * desiredRate;
-    requiredResources[inputResource] = inputRate;
+    if (recipes[inputResource]) {
+      const resourcesForInput = calculateResourcesForRecipe(inputResource, inputRate, calculatedRecipes);
+      for (const resource in resourcesForInput) {
+        requiredResources[resource] = (requiredResources[resource] || 0) + resourcesForInput[resource];
+      }
+    } else {
+      requiredResources[inputResource] = inputRate;
+    }
   }
 
   // Calculate and include number of machines needed (rounded up)
-  const machinesNeeded = Math.ceil((desiredRate / 10) / outputPerSec);
-  requiredResources[recipe.machine] = machinesNeeded;
+  const machinesNeeded = Math.ceil( desiredRate / outputPerSec);
+  requiredResources[recipe.machine] = machinesNeeded / 10;
+
+  // Include the recipe's output as a requirement
+  requiredResources[recipeName] = (requiredResources[recipeName] || 0) + desiredRate;
+
+  calculatedRecipes[recipeName] = requiredResources;
 
   return requiredResources;
 }
+
 
 // Calculate total resource requirements for multiple recipes
 function calculateTotalResources(recipeInputs) {
@@ -54,7 +71,17 @@ const totalResourcesRequired = calculateTotalResources(inputs);
 
 if (Object.keys(totalResourcesRequired).length > 0) {
   const logFilePath = path.join(__dirname, 'log');
-  const logContent = `Total Resources required for desired rates:\n${JSON.stringify(totalResourcesRequired, null, 2)}\n`;
+  let logContent = '';
+
+  for (const { recipeName, desiredRate } of inputs) {
+    if (desiredRate !== 0) {
+      const resourcesForRecipe = calculateResourcesForRecipe(recipeName, desiredRate);
+      if (resourcesForRecipe) {
+        logContent += `Resource requirements for '${recipeName}' (${desiredRate}): \n${JSON.stringify(resourcesForRecipe, null, 2)}\n\n`;
+      }
+    }
+  }
+
   fs.writeFileSync(logFilePath, logContent);
   console.log(`Log file saved: ${logFilePath}`);
 } else {
