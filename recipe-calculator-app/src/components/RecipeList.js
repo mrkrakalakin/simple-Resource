@@ -1,8 +1,9 @@
 // src/components/RecipeList.js
-import React, { useState } from "react";
-import recipesData from "../data/recipesData";
+import React, { useState } from 'react';
+import recipesData from '../data/recipesData';
+import Buttons from './Buttons'; // Import the Buttons component
 
-function RecipeList() {
+function RecipeList() { 
   const [desiredAmounts, setDesiredAmounts] = useState({});
   const recipeNames = Object.keys(recipesData);
 
@@ -30,6 +31,7 @@ function RecipeList() {
           </li>
         ))}
       </ul>
+      <Buttons.CalculateButton onClick={() => console.log('Calculate clicked')} />
     </div>
   );
 }
