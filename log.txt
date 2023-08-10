@@ -1,51 +1,49 @@
 Resource requirements for 'Turbine' (10):
 Output: 10
-  Turbine Assembler: 1.3
-  Turbine: 10
-  Turbine Fan:
+  Machines:
+    Turbine Assembler: 1.3
     TFan Assembler: 1.3
-    Turbine Fan: 10
-    Titanium Plate:
-      Titanium Furnace: 1.3
-      Titanium Plate: 10
-      Titanium Ore: 20
-    Iron Gear:
-      Iron Gear Assembler: 1.3
-      Iron Gear: 10
-      Iron Plate:
-        Iron Furnace: 1.3
-        Iron Plate: 10
-        Iron Ore: 10
-        Coal: 1.6666666666666665
-  Motor:
+    Titanium Furnace: 1.3
+    Iron Gear Assembler: 2.6
+    Iron Furnace: 5.2
     Motor Assembler: 1.3
-    Motor: 10
-    Iron Gear:
-      Iron Gear Assembler: 1.3
-      Iron Gear: 10
-      Iron Plate:
-        Iron Furnace: 1.3
-        Iron Plate: 10
-        Iron Ore: 10
-        Coal: 1.6666666666666665
-    Rotor: 10
-    Green Wire: 10
-    Iron Frame:
-      Iron Frame Assembler: 1.3
-      Iron Frame: 10
-      Iron Plate:
-        Iron Furnace: 1.3
-        Iron Plate: 10
-        Iron Ore: 10
-        Coal: 1.6666666666666665
-      Iron Pipe:
-        Iron Pipe Assembler: 1.3
-        Iron Pipe: 10
+    Iron Frame Assembler: 1.3
+    Iron Pipe Assembler: 1.3
+  Resources:
+    Turbine Fan:
+      Titanium Plate:
+        Titanium Ore: 20
+        Titanium Plate: 10
+      Iron Gear:
         Iron Plate:
-          Iron Furnace: 1.3
-          Iron Plate: 10
           Iron Ore: 10
           Coal: 1.6666666666666665
-  Steel Plate: 20
-  Super Connector: 10
+          Iron Plate: 10
+        Iron Gear: 10
+      Turbine Fan: 10
+    Motor:
+      Iron Gear:
+        Iron Plate:
+          Iron Ore: 10
+          Coal: 1.6666666666666665
+          Iron Plate: 10
+        Iron Gear: 10
+      Rotor: 10
+      Green Wire: 10
+      Iron Frame:
+        Iron Plate:
+          Iron Ore: 10
+          Coal: 1.6666666666666665
+          Iron Plate: 10
+        Iron Pipe:
+          Iron Plate:
+            Iron Ore: 10
+            Coal: 1.6666666666666665
+            Iron Plate: 10
+          Iron Pipe: 10
+        Iron Frame: 10
+      Motor: 10
+    Steel Plate: 20
+    Super Connector: 10
+    Turbine: 10
 
