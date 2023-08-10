@@ -1,14 +1,19 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // Import recipes.js
-const recipes = require('./recipes');
+const recipes = require("./recipes");
 
 // Import inputs.js
-const inputs = require('./inputs');
+const inputs = require("./inputs");
 
 // Calculate resource requirements for a single recipe
-function calculateResourcesForRecipe(recipeName, desiredRate, indent = 0, machines) {
+function calculateResourcesForRecipe(
+  recipeName,
+  desiredRate,
+  indent = 0,
+  machines
+) {
   const recipe = recipes[recipeName];
 
   if (!recipe) {
@@ -30,7 +35,12 @@ function calculateResourcesForRecipe(recipeName, desiredRate, indent = 0, machin
   for (const inputResource in recipe.inputs) {
     const inputRate = recipe.inputs[inputResource] * desiredRate;
     if (recipes[inputResource]) {
-      const resourcesForInput = calculateResourcesForRecipe(inputResource, inputRate, indent + 1, machines);
+      const resourcesForInput = calculateResourcesForRecipe(
+        inputResource,
+        inputRate,
+        indent + 1,
+        machines
+      );
       requiredResources[inputResource] = resourcesForInput;
     } else {
       requiredResources[inputResource] = inputRate;
@@ -42,24 +52,28 @@ function calculateResourcesForRecipe(recipeName, desiredRate, indent = 0, machin
 
 // Format resources with appropriate indentation
 function formatIndentedResources(resources, indent = 0, isMachines = false) {
-  let formatted = '';
+  let formatted = "";
 
   if (isMachines) {
-    formatted += `${'  '.repeat(indent)}Machines:\n`;
+    formatted += `${"  ".repeat(indent)}Machines:\n`;
     indent += 1;
   }
 
   for (const resource in resources) {
-    if (typeof resources[resource] === 'object') {
-      if (resource.endsWith(' Furnace') || resource.endsWith(' Assembler')) {
+    if (typeof resources[resource] === "object") {
+      if (resource.endsWith(" Furnace") || resource.endsWith(" Assembler")) {
         formatted += formatIndentedResources(resources[resource], indent, true);
       } else {
-        formatted += `${'  '.repeat(indent)}${resource}:\n`;
+        formatted += `${"  ".repeat(indent)}${resource}:\n`;
         formatted += formatIndentedResources(resources[resource], indent + 1);
       }
     } else {
       // Modify this line to display the machine values in parentheses
-      formatted += `${'  '.repeat(indent)}${resource}: ${resources[resource]}${typeof resources[resource] === 'number' && resource in machines ? ` (${Math.ceil(resources[resource])})` : ''}\n`;
+      formatted += `${"  ".repeat(indent)}${resource}: ${resources[resource]}${
+        typeof resources[resource] === "number" && resource in machines
+          ? ` (${Math.ceil(resources[resource])})`
+          : ""
+      }\n`;
     }
   }
 
@@ -67,19 +81,27 @@ function formatIndentedResources(resources, indent = 0, isMachines = false) {
 }
 
 // Usage and log
-const logFilePath = path.join(__dirname, 'log.txt');
-let logContent = '';
+const logFilePath = path.join(__dirname, "log.txt");
+let logContent = "";
 
 const machines = {}; // Define the machines object here
 
 for (const { recipeName, desiredRate } of inputs) {
   if (desiredRate !== 0) {
-    const resourcesForRecipe = calculateResourcesForRecipe(recipeName, desiredRate, 1, machines);
+    const resourcesForRecipe = calculateResourcesForRecipe(
+      recipeName,
+      desiredRate,
+      1,
+      machines
+    );
     if (resourcesForRecipe) {
       logContent += `Resource requirements for '${recipeName}' (${desiredRate}):\n`;
       logContent += `Output: ${desiredRate}\n`;
-      logContent += formatIndentedResources({ Machines: machines, Resources: resourcesForRecipe }, 1);
-      logContent += '\n';
+      logContent += formatIndentedResources(
+        { Machines: machines, Resources: resourcesForRecipe },
+        1
+      );
+      logContent += "\n";
     }
   }
 }
