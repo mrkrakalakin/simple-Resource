@@ -56,28 +56,36 @@ function calculateResourcesForRecipe(
 }
 
 // Format resources with appropriate indentation
-function formatIndentedResources(resources, indent = 0, isMachines = false) {
+function formatIndentedResources(resources, indent = 0, parentResourceName = null, isMachines = false) {
   let formatted = "";
-
-  if (isMachines) {
-    formatted += `${"  ".repeat(indent)}Machines:\n`;
-    indent += 1;
-  }
 
   for (const resource in resources) {
     if (typeof resources[resource] === "object") {
-      if (resource.endsWith(" Furnace") || resource.endsWith(" Assembler")) {
-        formatted += formatIndentedResources(resources[resource], indent, true);
-      } else {
-        formatted += `${"  ".repeat(indent)}${resource}:\n`;
-        formatted += formatIndentedResources(resources[resource], indent + 1);
+      let label = resource;
+
+      if (isMachines) {
+        label = `${label} (Machines)`;
+      } else if (parentResourceName) {
+        label = `${label} (${parentResourceName})`;
       }
+
+      formatted += `${"  ".repeat(indent)}${label}:\n${formatIndentedResources(
+        resources[resource],
+        indent + 1,
+        resource,
+        resource.endsWith(" Assembler") || resource.endsWith(" Furnace")
+      )}\n`;
     } else {
-      // Modify this line to display the machine values in parentheses
-      formatted += `${"  ".repeat(indent)}${resource}: ${resources[resource]}${
+      let label = resource;
+
+      if (parentResourceName) {
+        label = `${label} (${parentResourceName})`;
+      }
+
+      formatted += `${"  ".repeat(indent)}${label}: ${
         typeof resources[resource] === "number" && resource in machines
-          ? ` (${Math.ceil(resources[resource])})`
-          : ""
+          ? `${resources[resource]} (${Math.ceil(resources[resource])})`
+          : resources[resource]
       }\n`;
     }
   }

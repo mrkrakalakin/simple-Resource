@@ -1,61 +1,74 @@
 Resource requirements for 'Turbine' (10):
 Output: 10
   Machines:
-    Turbine Assembler: 1.3 (2)
-    TFan Assembler: 1.3 (2)
-    Titanium Furnace: 1.3 (2)
-    Iron Gear Assembler: 2.6 (3)
-    Iron Furnace: 5.2 (6)
-    Motor Assembler: 1.3 (2)
-    Iron Frame Assembler: 1.3 (2)
-    Iron Pipe Assembler: 1.3 (2)
+    Turbine Assembler (Machines): 1.3 (2)
+    TFan Assembler (Machines): 1.3 (2)
+    Titanium Furnace (Machines): 1.3 (2)
+    Iron Gear Assembler (Machines): 2.6 (3)
+    Iron Furnace (Machines): 5.2 (6)
+    Motor Assembler (Machines): 1.3 (2)
+    Iron Frame Assembler (Machines): 1.3 (2)
+    Iron Pipe Assembler (Machines): 1.3 (2)
+
   Resources:
-    recipeName: Turbine
-    desiredRate: 10
-    Turbine Fan:
-      recipeName: Turbine Fan
-      desiredRate: 10
-      Titanium Plate:
-        recipeName: Titanium Plate
-        desiredRate: 10
-        Titanium Ore: 20
-      Iron Gear:
-        recipeName: Iron Gear
-        desiredRate: 10
-        Iron Plate:
-          recipeName: Iron Plate
-          desiredRate: 10
-          Iron Ore: 10
-          Coal: 1.6666666666666665
-    Motor:
-      recipeName: Motor
-      desiredRate: 10
-      Iron Gear:
-        recipeName: Iron Gear
-        desiredRate: 10
-        Iron Plate:
-          recipeName: Iron Plate
-          desiredRate: 10
-          Iron Ore: 10
-          Coal: 1.6666666666666665
-      Rotor: 10
-      Green Wire: 10
-      Iron Frame:
-        recipeName: Iron Frame
-        desiredRate: 10
-        Iron Plate:
-          recipeName: Iron Plate
-          desiredRate: 10
-          Iron Ore: 10
-          Coal: 1.6666666666666665
-        Iron Pipe:
-          recipeName: Iron Pipe
-          desiredRate: 10
-          Iron Plate:
-            recipeName: Iron Plate
-            desiredRate: 10
-            Iron Ore: 10
-            Coal: 1.6666666666666665
-    Steel Plate: 20
-    Super Connector: 10
+    recipeName (Resources): Turbine
+    desiredRate (Resources): 10
+    Turbine Fan (Resources):
+      recipeName (Turbine Fan): Turbine Fan
+      desiredRate (Turbine Fan): 10
+      Titanium Plate (Turbine Fan):
+        recipeName (Titanium Plate): Titanium Plate
+        desiredRate (Titanium Plate): 10
+        Titanium Ore (Titanium Plate): 20
+
+      Iron Gear (Turbine Fan):
+        recipeName (Iron Gear): Iron Gear
+        desiredRate (Iron Gear): 10
+        Iron Plate (Iron Gear):
+          recipeName (Iron Plate): Iron Plate
+          desiredRate (Iron Plate): 10
+          Iron Ore (Iron Plate): 10
+          Coal (Iron Plate): 1.6666666666666665
+
+
+
+    Motor (Resources):
+      recipeName (Motor): Motor
+      desiredRate (Motor): 10
+      Iron Gear (Motor):
+        recipeName (Iron Gear): Iron Gear
+        desiredRate (Iron Gear): 10
+        Iron Plate (Iron Gear):
+          recipeName (Iron Plate): Iron Plate
+          desiredRate (Iron Plate): 10
+          Iron Ore (Iron Plate): 10
+          Coal (Iron Plate): 1.6666666666666665
+
+
+      Rotor (Motor): 10
+      Green Wire (Motor): 10
+      Iron Frame (Motor):
+        recipeName (Iron Frame): Iron Frame
+        desiredRate (Iron Frame): 10
+        Iron Plate (Iron Frame):
+          recipeName (Iron Plate): Iron Plate
+          desiredRate (Iron Plate): 10
+          Iron Ore (Iron Plate): 10
+          Coal (Iron Plate): 1.6666666666666665
+
+        Iron Pipe (Iron Frame):
+          recipeName (Iron Pipe): Iron Pipe
+          desiredRate (Iron Pipe): 10
+          Iron Plate (Iron Pipe):
+            recipeName (Iron Plate): Iron Plate
+            desiredRate (Iron Plate): 10
+            Iron Ore (Iron Plate): 10
+            Coal (Iron Plate): 1.6666666666666665
+
+
+
+
+    Steel Plate (Resources): 20
+    Super Connector (Resources): 10
+
 
