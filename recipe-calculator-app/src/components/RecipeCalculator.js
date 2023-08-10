@@ -9,7 +9,9 @@ function RecipeCalculator() {
   const [desiredAmounts, setDesiredAmounts] = useState({});
 
   const handleAmountChange = (recipeName, amount) => {
-    setDesiredAmounts(prevAmounts => ({ ...prevAmounts, [recipeName]: parseFloat(amount) }));
+    // Format the recipeName to match keys in recipesData
+    const formattedRecipeName = recipeName.toLowerCase();
+    setDesiredAmounts(prevAmounts => ({ ...prevAmounts, [formattedRecipeName]: parseFloat(amount) }));
   };
 
   const handleCalculate = () => {
@@ -27,7 +29,7 @@ function RecipeCalculator() {
           <input
             type="number"
             id={recipeName}
-            value={desiredAmounts[recipeName] || ''}
+            value={desiredAmounts[recipeName.toLowerCase()] || ''}
             onChange={e => handleAmountChange(recipeName, e.target.value)}
           />
         </div>
