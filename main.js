@@ -8,7 +8,7 @@ const recipes = require('./recipes');
 const inputs = require('./inputs');
 
 // Calculate resource requirements for a single recipe
-function calculateResourcesForRecipe(recipeName, desiredRate, indent = 0, machines = {}) {
+function calculateResourcesForRecipe(recipeName, desiredRate, indent = 0, machines) {
   const recipe = recipes[recipeName];
 
   if (!recipe) {
@@ -37,8 +37,6 @@ function calculateResourcesForRecipe(recipeName, desiredRate, indent = 0, machin
     }
   }
 
-  requiredResources[recipeName] = desiredRate;
-
   return requiredResources;
 }
 
@@ -60,7 +58,8 @@ function formatIndentedResources(resources, indent = 0, isMachines = false) {
         formatted += formatIndentedResources(resources[resource], indent + 1);
       }
     } else {
-      formatted += `${'  '.repeat(indent)}${resource}: ${resources[resource]}\n`;
+      // Modify this line to display the machine values in parentheses
+      formatted += `${'  '.repeat(indent)}${resource}: ${resources[resource]}${typeof resources[resource] === 'number' && resource in machines ? ` (${Math.ceil(resources[resource])})` : ''}\n`;
     }
   }
 
@@ -71,9 +70,10 @@ function formatIndentedResources(resources, indent = 0, isMachines = false) {
 const logFilePath = path.join(__dirname, 'log.txt');
 let logContent = '';
 
+const machines = {}; // Define the machines object here
+
 for (const { recipeName, desiredRate } of inputs) {
   if (desiredRate !== 0) {
-    const machines = {};
     const resourcesForRecipe = calculateResourcesForRecipe(recipeName, desiredRate, 1, machines);
     if (resourcesForRecipe) {
       logContent += `Resource requirements for '${recipeName}' (${desiredRate}):\n`;

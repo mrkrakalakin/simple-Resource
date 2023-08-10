@@ -1,49 +1,37 @@
 Resource requirements for 'Turbine' (10):
 Output: 10
   Machines:
-    Turbine Assembler: 1.3
-    TFan Assembler: 1.3
-    Titanium Furnace: 1.3
-    Iron Gear Assembler: 2.6
-    Iron Furnace: 5.2
-    Motor Assembler: 1.3
-    Iron Frame Assembler: 1.3
-    Iron Pipe Assembler: 1.3
+    Turbine Assembler: 1.3 (2)
+    TFan Assembler: 1.3 (2)
+    Titanium Furnace: 1.3 (2)
+    Iron Gear Assembler: 2.6 (3)
+    Iron Furnace: 5.2 (6)
+    Motor Assembler: 1.3 (2)
+    Iron Frame Assembler: 1.3 (2)
+    Iron Pipe Assembler: 1.3 (2)
   Resources:
     Turbine Fan:
       Titanium Plate:
         Titanium Ore: 20
-        Titanium Plate: 10
       Iron Gear:
         Iron Plate:
           Iron Ore: 10
           Coal: 1.6666666666666665
-          Iron Plate: 10
-        Iron Gear: 10
-      Turbine Fan: 10
     Motor:
       Iron Gear:
         Iron Plate:
           Iron Ore: 10
           Coal: 1.6666666666666665
-          Iron Plate: 10
-        Iron Gear: 10
       Rotor: 10
       Green Wire: 10
       Iron Frame:
         Iron Plate:
           Iron Ore: 10
           Coal: 1.6666666666666665
-          Iron Plate: 10
         Iron Pipe:
           Iron Plate:
             Iron Ore: 10
             Coal: 1.6666666666666665
-            Iron Plate: 10
-          Iron Pipe: 10
-        Iron Frame: 10
-      Motor: 10
     Steel Plate: 20
     Super Connector: 10
-    Turbine: 10
 
