@@ -4,7 +4,6 @@
 const recipes = require("./recipes");
 
 // Calculate resource requirements for a single recipe
-// Calculate resource requirements for a single recipe
 function calculateResourcesForRecipe(
   recipeName,
   desiredRate,
