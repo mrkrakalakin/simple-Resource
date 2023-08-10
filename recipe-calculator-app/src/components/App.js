@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import RecipeSelector from './RecipeSelector';
-import TreeVisualization from './ResourceTree';
+// components/App.js
+import React from 'react';
+import RecipeCalculator from './RecipeCalculator';
 import '../styles/styles.css';
 
 function App() {
-  const [calculatedData, setCalculatedData] = useState(null);
-
   return (
     <div className="App">
       <header className="App-header">
-        <RecipeSelector setCalculatedData={setCalculatedData} />
-        {calculatedData && <TreeVisualization data={calculatedData} />}
+        <RecipeCalculator />
       </header>
     </div>
   );

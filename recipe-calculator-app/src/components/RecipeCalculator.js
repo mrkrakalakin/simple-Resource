@@ -1,51 +1,47 @@
+// components/RecipeCalculator.js
 import React, { useState } from 'react';
-import calculateResourcesForRecipe from '../data/calculateResources';
+import calculateResources from '../data/calculateResources';
+import ResourceTree from './ResourceTree';
+import recipesData from '../data/recipesData';
 
 function RecipeCalculator() {
-  const [recipeName, setRecipeName] = useState('');
-  const [desiredRate, setDesiredRate] = useState('');
-  const [result, setResult] = useState(null);
+  const [calculatedResources, setCalculatedResources] = useState(null);
+  const [desiredAmounts, setDesiredAmounts] = useState({});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const resourcesForRecipe = calculateResourcesForRecipe(
-      recipeName,
-      parseInt(desiredRate)
-    );
-    setResult(resourcesForRecipe);
+  const handleAmountChange = (recipeName, amount) => {
+    setDesiredAmounts(prevAmounts => ({ ...prevAmounts, [recipeName]: parseFloat(amount) }));
+  };
+
+  const handleCalculate = () => {
+    const updatedCalculatedData = {};
+    
+    // Filter out entries with NaN values (not valid numbers)
+    for (const recipeName in desiredAmounts) {
+      const amount = parseFloat(desiredAmounts[recipeName]);
+      if (!isNaN(amount)) {
+        updatedCalculatedData[recipeName] = amount;
+      }
+    }
+
+    const resourcesData = calculateResources(updatedCalculatedData, 1, 0, {});
+    setCalculatedResources(resourcesData);
   };
 
   return (
     <div>
-      <h1>Recipe Calculator</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Recipe Name:
-          <input
-            type="text"
-            value={recipeName}
-            onChange={(e) => setRecipeName(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Desired Rate:
+      {Object.keys(recipesData).map(recipeName => (
+        <div key={recipeName}>
+          <label htmlFor={recipeName}>{recipeName}:</label>
           <input
             type="number"
-            value={desiredRate}
-            onChange={(e) => setDesiredRate(e.target.value)}
+            id={recipeName}
+            value={desiredAmounts[recipeName] || ''}
+            onChange={e => handleAmountChange(recipeName, e.target.value)}
           />
-        </label>
-        <br />
-        <button type="submit">Calculate</button>
-      </form>
-      <div>
-        {result && (
-          <pre>
-            {JSON.stringify(result, null, 2)}
-          </pre>
-        )}
-      </div>
+        </div>
+      ))}
+      <button onClick={handleCalculate}>Calculate</button>
+      {calculatedResources && <ResourceTree resources={calculatedResources} />}
     </div>
   );
 }
