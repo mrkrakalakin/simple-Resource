@@ -1,3 +1,4 @@
+// Import the required modules
 const fs = require("fs");
 const path = require("path");
 
@@ -37,7 +38,7 @@ function calculateResourcesForRecipe(
 
   for (const inputResource in recipe.inputs) {
     const inputRate = recipe.inputs[inputResource] * desiredRate;
-    if (recipes[inputResource]) {
+    if (recipe.inputs.hasOwnProperty(inputResource)) {
       const resourcesForInput = calculateResourcesForRecipe(
         inputResource,
         inputRate,
@@ -85,7 +86,7 @@ function formatIndentedResources(resources, indent = 0, isMachines = false) {
 
 // Usage and log
 const logFilePath = path.join(__dirname, "log.txt");
-let logContent = "";
+const logContent = [];
 
 const machines = {}; // Define the machines object here
 
@@ -98,16 +99,13 @@ for (const { recipeName, desiredRate } of inputs) {
       machines
     );
     if (resourcesForRecipe) {
-      logContent += `Resource requirements for '${recipeName}' (${desiredRate}):\n`;
-      logContent += `Output: ${desiredRate}\n`;
-      logContent += formatIndentedResources(
-        { Machines: machines, Resources: resourcesForRecipe },
-        1
-      );
-      logContent += "\n";
+      logContent.push(`Resource requirements for '${recipeName}' (${desiredRate}):`);
+      logContent.push(`Output: ${desiredRate}`);
+      logContent.push(formatIndentedResources({ Machines: machines, Resources: resourcesForRecipe }, 1));
+      logContent.push(""); // Add an empty line after each recipe log
     }
   }
 }
 
-fs.writeFileSync(logFilePath, logContent);
+fs.writeFileSync(logFilePath, logContent.join("\n"));
 console.log(`Log file saved: ${logFilePath}`);
