@@ -23,7 +23,10 @@ function calculateResourcesForRecipe(
   const machineTime = recipe.machineTime;
   const outputPerSec = recipe.outputs[recipeName] / machineTime;
 
-  const requiredResources = {};
+  const requiredResources = {
+    recipeName,
+    desiredRate,
+  };
 
   if (recipe.machine) {
     if (!machines[recipe.machine]) {

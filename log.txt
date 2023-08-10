@@ -10,26 +10,50 @@ Output: 10
     Iron Frame Assembler: 1.3 (2)
     Iron Pipe Assembler: 1.3 (2)
   Resources:
+    recipeName: Turbine
+    desiredRate: 10
     Turbine Fan:
+      recipeName: Turbine Fan
+      desiredRate: 10
       Titanium Plate:
+        recipeName: Titanium Plate
+        desiredRate: 10
         Titanium Ore: 20
       Iron Gear:
+        recipeName: Iron Gear
+        desiredRate: 10
         Iron Plate:
+          recipeName: Iron Plate
+          desiredRate: 10
           Iron Ore: 10
           Coal: 1.6666666666666665
     Motor:
+      recipeName: Motor
+      desiredRate: 10
       Iron Gear:
+        recipeName: Iron Gear
+        desiredRate: 10
         Iron Plate:
+          recipeName: Iron Plate
+          desiredRate: 10
           Iron Ore: 10
           Coal: 1.6666666666666665
       Rotor: 10
       Green Wire: 10
       Iron Frame:
+        recipeName: Iron Frame
+        desiredRate: 10
         Iron Plate:
+          recipeName: Iron Plate
+          desiredRate: 10
           Iron Ore: 10
           Coal: 1.6666666666666665
         Iron Pipe:
+          recipeName: Iron Pipe
+          desiredRate: 10
           Iron Plate:
+            recipeName: Iron Plate
+            desiredRate: 10
             Iron Ore: 10
             Coal: 1.6666666666666665
     Steel Plate: 20
