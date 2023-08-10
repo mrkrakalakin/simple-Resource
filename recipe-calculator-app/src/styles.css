@@ -1,0 +1,40 @@
+/* Apply styles to tree nodes */
+.recipe-node {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+}
+
+/* Apply styles to connections between nodes */
+.recipe-connection {
+  border-left: 1px solid #ccc;
+  height: 20px;
+  margin-left: 5px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.tree-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.tree-node {
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin: 4px;
+  background-color: #f7f7f7;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.tree-node-header {
+  font-weight: bold;
+}
+
+.tree-node-children {
+  margin-top: 8px;
+  margin-left: 20px;
+}
