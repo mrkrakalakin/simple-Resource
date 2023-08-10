@@ -1,13 +1,13 @@
-// components/App.js
+// App.js
 import React from 'react';
-import RecipeCalculator from './RecipeCalculator';
-import '../styles/styles.css';
+import '../styles/styles.css';  // Update the path to styles.css
+import RecipeSelector from './RecipeSelector';  // Update the path to RecipeSelector
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <RecipeCalculator />
+        <RecipeSelector />
       </header>
     </div>
   );

@@ -2,11 +2,28 @@
 import React from 'react';
 
 const ResourceTree = ({ resources }) => {
-  return (
-    <div className="resource-tree">
-      <pre>{JSON.stringify(resources, null, 2)}</pre>
-    </div>
-  );
+  const renderResourceTree = (resource, indent = 0) => {
+    if (typeof resource === 'string') {
+      return <div style={{ marginLeft: `${indent * 20}px` }}>{resource}</div>;
+    }
+
+    return (
+      <div style={{ marginLeft: `${indent * 20}px` }}>
+        <div>
+          {resource.recipeName} ({resource.desiredRate})
+        </div>
+        {Object.keys(resource).map(subResourceName => (
+          subResourceName !== 'recipeName' && subResourceName !== 'desiredRate' && (
+            <div key={subResourceName}>
+              {renderResourceTree(resource[subResourceName], indent + 1)}
+            </div>
+          )
+        ))}
+      </div>
+    );
+  };
+
+  return <div>{renderResourceTree(resources)}</div>;
 };
 
 export default ResourceTree;
