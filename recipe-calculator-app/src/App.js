@@ -1,8 +1,8 @@
 // src/App.js
 import React from 'react';
-import '../styles/App.css';
-import '../styles/styles.css';
-import RecipeList from '../components/RecipeList';
+import './styles/App.css';
+import './styles/styles.css';
+import RecipeList from './components/RecipeList';
 
 function App() {
   return (
